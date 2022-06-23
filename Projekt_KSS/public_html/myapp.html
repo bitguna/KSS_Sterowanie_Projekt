@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!-- AWP_In_Variable Name='"webdata".START' -->
+<!-- AWP_In_Variable Name='"webdata".STOP' -->
+<!-- AWP_In_Variable Name='"webdata".Potwierdzenie alarmu' -->
+<!-- AWP_In_Variable Name='"pam_start"' -->
+<!-- AWP_In_Variable Name='"pam_stop"' -->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sterowanie Silnikem</title>
+    <link rel="Shortcut icon" href=".ścieżka">
+    <meta name="Author" content="Wojciech Jakimczyk ">
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <script src="skrypt.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong">
+    <style>
+        
+ 
+        table,
+        th,
+        td {
+            border-collapse: collapse;
+            border: 1px solid black;
+            padding: 5px;
+        }
+        h1 {
+            background-color: rgb(181, 181, 185);
+        }
+ 
+        h1.a {
+            font-family: "Audiowide", sans-serif;
+        }
+ 
+        h1.b {
+            font-family: "Sofia", sans-serif;
+        }
+ 
+        h1.c {
+            font-family: "Trirong", serif;
+        }
+    </style>
+</head>
+<body onload="return checkStatus()">
+   
+    <script type="text/javascript">
+        function checkStatus() {
+            const url = window.location.href.toString()
+            const c = url.substring(url.indexOf('?') + 1)
+            if (c == "%22webdata%22.AWARIA=1" || c == "%22webdata%22.STOP=1&%22webdata%22.START=0") {
+                document.getElementById('myImage')
+                    .src = "img/red.png";
+                document.getElementById('message')
+                    .innerHTML = "Status Wstrzymane";
+                console.log("czerwono");
+            }
+            else {
+                document.getElementById('myImage')
+                    .src = "img/green.png";
+                document.getElementById('message')
+                    .innerHTML = "Status: Dziala";
+                console.log("zielono");
+            }
+        }
+    </script>
+ 
+ 
+    <div class="container">
+        <h1> Zdalne Sterowanie Silnikiem  </h1>
+        <hr>
+ 
+        <img src="obraz.png" img>
+        <div>
+            <form>
+                <input type="hidden" name='"webdata".STOP' value="0" >
+                <input type="hidden" name='"webdata".START' value="1">
+                <input type="submit" id="button" value="START" >
+            </form>
+ 
+            <form>
+                <input type="hidden" name='"webdata".STOP' value="1">
+                <input type="hidden" name='"webdata".START' value="0">
+                <input type="submit" id="button" value="STOP">
+            </form>
+ 
+            <form>
+                <input type="hidden" name='"webdata".Potwierdzenie alarmu' value="1">
+                <input type="submit" id="button" value="POTWIERDZENIE ON">
+            </form>
+ 
+            <form>
+                <input type="hidden" name='"webdata".Potwierdzenie alarmu' value="0">
+                <input type="submit" id="button" value="POTWIERDZENIE OFF">
+            </form>
+ 
+            <form>
+                <input type="hidden" name='"webdata".AWARIA' value="1">
+                <input type="submit" id="button" value="AWARIA" >
+ 
+            </form>
+            
+            <form>
+                <input type="button" value="Zerowanie Strony" onclick="history.back()">
+               </form>
+        </div>
+ 
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h1 id="message">
+                    Status
+                </h1>
+                <img id="myImage"
+                     src="">
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    
+        
+ 
+</body>
+</html>
